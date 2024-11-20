@@ -1,5 +1,5 @@
 import datetime
-from typing import Annotated
+from typing import Annotated, Optional
 from fastapi import FastAPI, Form
 from pydantic import BaseModel
 
@@ -11,6 +11,15 @@ class Order(BaseModel):
     description : str
     client : str
     status : str
+
+
+class UpdateOrderDTO(BaseModel):
+    number: int
+    status: Optional[str] = ""
+    description: Optional[str] = ""
+    master: Optional[str] = ""
+    comment : Optional[str] = str
+
 
 
 repo = [
