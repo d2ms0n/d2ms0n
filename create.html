@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Создание заявки</title>
+</head>
+<body>
+    <a href="create.html">Создание заявки</a>
+    <a href="orders.html">Список заявок</a>
+    <a href="update.html">Обновление заявки</a>
+    
+     <form target="frame" action="http://localhost:8000/orders" method="post">
+        <input required placeholder="Номер" type="number" name="number" /><br/>
+        <label for="startDate">Дата начала</label><br/>
+        <input required type="date" name="startDate" /><br/>
+        <input required placeholder="Оборудование" type="text" name="device" /><br/>
+        <input required placeholder="Тип проблемы" type="text" name="problemType" /><br/>
+        <input required placeholder="Описание" type="text" name="description" /><br/>
+        <input required placeholder="Клиент" type="text" name="client" /><br/>
+        <label for="status">Статус</label><br/>
+        <select name="status">
+            <option>в ожидании</option>
+            <option>в работе</option>
+            <option>выполнено</option>
+        </select><br/>
+        <input type="submit" value="Создание"  />
+    </form>
+</body>
+</html>

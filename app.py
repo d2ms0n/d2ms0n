@@ -18,8 +18,8 @@ class UpdateOrderDTO(BaseModel):
     number: int
     status: Optional[str] = ""
     description: Optional[str] = ""
-    master: Optional[str] = ""
-    comment : Optional[str] = str
+    master : Optional[str] = "Не назначен"
+    comment : Optional[str] = ""
 
 
 
