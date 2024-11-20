@@ -45,3 +45,18 @@ def root():
 def create_order(dto : Annotated[Order, Form()]):
     repo.append(dto)
 
+
+@app.post("/update")
+def update_order(dto : Annotated[UpdateOrderDTO, Form()]):
+    global message
+    for o in repo:
+        if o.number == dto.number:
+              if dto.status != o.status and dto.status != "":                     
+                if dto.description != "":
+                    o.description = dto.description
+                if dto.master != "":
+                    o.master = dto.master
+                if dto.comment != None and dto.comment != "":
+                    o.comments.append(dto.comment)
+                return o
+    return "Не найдено"
