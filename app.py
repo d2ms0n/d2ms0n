@@ -86,7 +86,11 @@ def update_order(dto : Annotated[UpdateOrderDTO, Form()]):
     global message
     for o in repo:
         if o.number == dto.number:
-              if dto.status != o.status and dto.status != "":                     
+              if dto.status != o.status and dto.status != "":
+                    
+                o.status = dto.status
+                message += f"Статус заявки №{o.number} изменен\n"   
+
                 if dto.description != "":
                     o.description = dto.description
                 if dto.master != "":
