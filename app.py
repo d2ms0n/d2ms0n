@@ -38,7 +38,9 @@ repo = [
 app = FastAPI()
  
 @app.get("/orders")
-def root():
+def get_orders(param = None):
+    if(param):
+        return { "repo" : [o for o in repo if o.number == int(param)]}
     return repo
 
 @app.post("/orders")
