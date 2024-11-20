@@ -23,8 +23,26 @@ class UpdateOrderDTO(BaseModel):
 
 
 repo = [
-        Order(
+    Order(
         number = 1,
+        startDate = "2000-12-01",
+        device = "123",
+        problemType = "123",
+        description = "123",
+        client = "123",
+        status = "в ожидании"
+    ),
+    Order(
+        number = 2,
+        startDate = "2000-12-01",
+        device = "123",
+        problemType = "123",
+        description = "123",
+        client = "123",
+        status = "в ожидании"
+    ),
+    Order(
+        number = 3,
         startDate = "2000-12-01",
         device = "123",
         problemType = "123",
@@ -36,12 +54,15 @@ repo = [
 
 
 app = FastAPI()
+
+message = ""
  
 @app.get("/orders")
 def get_orders(param = None):
+    global message
     if(param):
-        return { "repo" : [o for o in repo if o.number == int(param)]}
-    return repo
+        return { "repo" : [o for o in repo if o.number == int(param)], "message":message}
+    return {"repo" :repo, "message":message} 
 
 @app.post("/orders")
 def create_order(dto : Annotated[Order, Form()]):
