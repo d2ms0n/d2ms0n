@@ -11,9 +11,22 @@ class Order(BaseModel):
     client : str
     status : str
 
- 
+
+repo = [
+        Order(
+        number = 1,
+        startDate = "2000-12-01",
+        device = "123",
+        problemType = "123",
+        description = "123",
+        client = "123",
+        status = "в ожидании"
+    )
+]
+
+
 app = FastAPI()
  
-@app.get("/")
+@app.get("/orders")
 def root():
-    return {"message": "Hello METANIT.COM"}
+    return repo
