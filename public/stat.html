@@ -51,5 +51,26 @@
             stat_table.append(tr);
         }
     }
+
+
+    window.onload = check_autorizion;
+     
+    function check_autorizion(){
+         fetch("http://localhost:8000/isauth")
+        .then(response => {
+        if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+        return response.json();
+    })
+    .then(res => {
+      if (!res) { 
+        window.location.href = 'http://localhost:8000/static/auth.html';
+      }
+    })
+    .catch(error => {
+      console.error('Ошибка при проверке авторизации:', error);
+    });
+}
 </script>
 </html>

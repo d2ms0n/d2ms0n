@@ -83,12 +83,6 @@ def isauto(request):
 
     return False
 
-
-
-
-
-
-
 @app.get("/orders")
 def get_orders(request: Request, param = None):
     if not isauto(request): 
@@ -163,9 +157,6 @@ def get_statistics(request: Request):
 
 @app.get("/auth")
 def get_orders(login = None, password  = None):
-
-
-
     if login in Users and password == Users[login]: 
         token = uuid4()
         Tokens[login] = str(token)
@@ -178,9 +169,14 @@ def get_orders(login = None, password  = None):
 @app.get("/")
 def go_index(request: Request):
     if not isauto(request): 
-        return RedirectResponse("/static/auth.html")
-    
+        return RedirectResponse("/static/auth.html")    
     return RedirectResponse("/static/stat.html")
+
+@app.get("/isauth")
+def go_index(request: Request): 
+    return isauto(request)
+    
+
           
 
 
