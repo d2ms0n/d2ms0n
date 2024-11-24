@@ -4,15 +4,15 @@
     <title>Список заявок</title>
 </head>
 <body>
-
     <a href="create.html">Создание заявки</a>
     <a href="orders.html">Список заявок</a>
     <a href="update.html">Обновление заявки</a>
+    <a href="stat.html">Статистика</a>
     <div>
         <input id="search" placeholder="Номер"/> 
         <button onClick="GetFilter()">Найти</button>
     </div>
-      <table>
+    <table>
         <thead>
             <tr>
                 <th>Номер заявки</th>
@@ -35,13 +35,17 @@
         GetOrders();
 
         async function GetOrders(param = null) {
-
             let uri = param ? 
             `http://127.0.0.1:8000/orders?param=${param}` : 
             "http://127.0.0.1:8000/orders";
 
+            let response = await fetch(uri).then(data => data.json())
 
-            let response = await fetch(uri).then(data => data.json());
+            if (response == "noauth"){
+            window.location.href = 'http://localhost:8000/static/auth.html'
+            }
+
+            
             if(response.message)
                 alert(response.message);
 
@@ -61,14 +65,14 @@
 
                 tbody.append(tr);
             });
+            
         }
 
-    function GetFilter() {
-        tbody.innerHTML = ""
-        let param = document.getElementById("search").value;
-        GetOrders(param)
-    }
-
+        function GetFilter() {
+            tbody.innerHTML = ""
+            let param = document.getElementById("search").value;
+            GetOrders(param)
+        }
     </script>
     <style>
         th, td { border: 1px solid black;}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Авторизация</title>
+</head>
+<body>
+    <a href="create.html">Создание заявки</a>
+    <a href="orders.html">Список заявок</a>
+    <a href="update.html">Обновление заявки</a>
+    
+ <p>
+     <form target="frame"  method="get"> 
+        <input required placeholder="Логин" type="text" id="login" /><br/>
+        <input required placeholder="Пароль" type="password" id="password" /><br/>
+        <input type="button" value="Отправить" onclick="myFunction()" />
+     </form>
+</p>
+</body>
+<script>
+ 
+async function myFunction() {
+
+    let login = document.getElementById("login").value;
+    let password = document.getElementById("password").value;
+
+
+    console.log(login,password);
+
+    dlp = `http://localhost:8000/auth?login=${login}&password=${password}`;
+    let data = await fetch(dlp);
+    let res = await data.json();
+    if (res ){
+        var cookie_date = new Date();
+        cookie_date.setMonth(cookie_date.getMonth() + 1);
+        document.cookie = `token=${res};path=/`;
+        document.cookie = `login=${login};path=/`;
+        alert("Вы успешно авторизовались");
+        window.location.href = 'http://localhost:8000/'
+    }
+    else{
+        alert("Неверный логин или пароль"); 
+    }
+
+
+
+
+
+
+  
+  
+
+  
+  
+  
+  
+  
+
+   
+}
+    
+    </script>
+</html>

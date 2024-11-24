@@ -36,7 +36,9 @@
     {
         let data = await fetch("http://localhost:8000/statistics");
         let stat = await data.json();
-
+        if (stat == "noauth"){
+            window.location.href = 'http://localhost:8000/static/auth.html'
+        }
         complete_count.append(stat.complete_count);
         average_time_to_complete.append(stat.average_time_to_complete);
 
